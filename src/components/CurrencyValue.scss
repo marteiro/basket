@@ -1,0 +1,9 @@
+.CurrencyValue{
+  all: unset;
+  font-weight: inherit;
+
+  display: grid !important;
+  grid-template-columns: 1fr auto;
+  width: 100%;
+
+}

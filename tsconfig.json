@@ -1,0 +1,36 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": [
+      "es2015",
+      "es2016",
+      "es2017",
+      "esnext",
+      "es6",
+      "DOM"
+    ],
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "strictPropertyInitialization": false,
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    ".git",
+    ".vscode",
+    ".gitignore",
+    "README.md",
+    "node_modules"
+  ]
+}

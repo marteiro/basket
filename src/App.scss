@@ -1,0 +1,65 @@
+.body {
+  overflow-x: hidden;
+  
+}
+
+.App {
+  --side-margin: 20px;
+
+  font-family: 'Roboto';
+  display: block;
+  max-width: 600px;
+  margin: 0 auto;
+
+  header{
+    margin-left: var(--side-margin);
+
+    img{
+      height: 60px;
+    }
+  }
+
+  .info{
+    padding: 0 var(--side-margin);
+    box-sizing: border-box;
+    margin: 50px 0;
+  }
+
+  .table {
+    display: grid;
+    grid-template-columns: 1fr repeat(3, auto);
+
+    & > div {
+      display: contents;
+    }
+
+    .tableHead{
+      & > div{
+        border-bottom: 2px solid black;
+        margin-bottom: 20px;
+        padding: 0 var(--side-margin);
+        
+        // align all but first table head title to center
+        &:not(:first-child){
+          text-align: center;
+        }
+      }
+    }
+
+    .tableBody{
+      & > *:nth-child(2n+0) {
+        --row-color: #eee;
+      }
+    }
+
+    .tableFoot{
+      & > *:first-child > *{
+        margin-top: 20px;
+      }
+
+      & > *:last-child > *{
+        margin-top: 20px;
+      }
+    }
+  }
+}

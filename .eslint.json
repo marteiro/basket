@@ -1,0 +1,94 @@
+{
+  "settings": {
+      "react": {
+          "version": "detect"
+      }
+  },
+  "env": {
+      "es2021": true,
+      "node": true
+  },
+  "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": 12,
+      "sourceType": "module"
+  },
+  "plugins": [
+      "react",
+      "@typescript-eslint"
+  ],
+  "rules": {
+      "indent": [
+          "error",
+          4
+      ],
+      "newline-before-return": [
+          "error"
+      ],
+      "linebreak-style": [
+          "error",
+          "unix"
+      ],
+      "quotes": [
+          "error",
+          "single"
+      ],
+      "semi": [
+          "error",
+          "never"
+      ],
+      "no-multiple-empty-lines": [
+          "error",
+          {
+              "max": 1,
+              "maxEOF": 0
+          }
+      ],
+      "no-use-before-define": [
+          "off"
+      ],
+      "no-undef": [
+          "off"
+      ],
+      "camelcase": [
+          "off"
+      ],
+      "react/display-name": [
+          "off"
+      ],
+      "curly":["error"],
+      "padding-line-between-statements": [
+          "error",
+          {
+              "blankLine": "always",
+              "prev": "var",
+              "next": "return"
+          }
+      ],
+      "react/jsx-wrap-multilines": [
+          "error",
+          {
+              "declaration": "parens-new-line",
+              "assignment": "parens-new-line",
+              "return": "parens-new-line",
+              "arrow": "parens-new-line",
+              "condition": "parens-new-line",
+              "logical": "ignore",
+              "prop": "ignore"
+          }
+      ],
+      "@typescript-eslint/no-empty-interface": [
+          "off"
+      ],
+      "@typescript-eslint/no-explicit-any": "off"
+  }
+}

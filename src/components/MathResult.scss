@@ -1,0 +1,12 @@
+.MathResult{
+  display: contents;
+  
+  label{
+    grid-column: 1 / span 3;
+  }
+
+  & > *{
+    box-sizing: border-box;
+    padding: 0 var(--side-margin);
+  }
+}
