@@ -1,5 +1,6 @@
-import React, { SyntheticEvent } from "react";
+import React from "react";
 import { IProduct } from "src/api/RandomShop";
+import { CURRENCY_CODE, LOCALE, MAX_ITEM_COUNT } from "../config";
 import CurrencyValue from "./CurrencyValue";
 
 import './ShopItem.scss'
@@ -14,7 +15,6 @@ interface IState {
   isRemoving: boolean
 }
 
-const maxItemCount = 5;
 
 export default class ShopItem extends React.Component<IProps, IState> {
   public readonly state: IState = {
@@ -31,11 +31,11 @@ export default class ShopItem extends React.Component<IProps, IState> {
   private _update = (value: string | number) => {
     const pickedValue = parseInt(value as string)
 
-    if(pickedValue > maxItemCount) alert(`Maxium of ${maxItemCount} units per product type`) 
+    if (pickedValue > MAX_ITEM_COUNT) alert(`Maxium of ${MAX_ITEM_COUNT} units per product type`)
 
     this.setState({
       ...this.state,
-      quantity: Math.min(pickedValue, maxItemCount)
+      quantity: Math.min(pickedValue, MAX_ITEM_COUNT)
     });
     this.props.onChange(this.cost);
   };
@@ -60,10 +60,10 @@ export default class ShopItem extends React.Component<IProps, IState> {
         </label>
 
         <CurrencyValue
-          symbol="£"
+          code={CURRENCY_CODE}
+          locale={LOCALE}
           value={this.cost}
-          title="Price"
-          code="GBP" />
+          title="Price" />
 
         <div>
           <input
@@ -78,17 +78,17 @@ export default class ShopItem extends React.Component<IProps, IState> {
 
         <div className="columnCost">
           <CurrencyValue
-            symbol="£"
+            code={CURRENCY_CODE}
             value={this.cost}
-            title="Cost"
-            code="GBP" />
+            locale={LOCALE}
+            title="Cost" />
 
           <button onClick={this._remove}>
-            Remove Product
+          Remove Product
           </button>
         </div>
 
-      </fieldset>
+      </fieldset >
     );
   }
 }

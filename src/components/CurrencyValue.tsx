@@ -4,19 +4,19 @@ import { IProduct } from "src/api/RandomShop";
 import './CurrencyValue.scss'
 
 interface IPros {
-  symbol: string
+  locale: string
   value: number
   code: string
   title: string
 }
 
-export default function CurrencyValue({symbol, value, code, title}:IPros) {
+export default function CurrencyValue({locale,  value, code, title}:IPros) {
   
+  const currencyString = value.toLocaleString(locale,{style: 'currency', currency: code})
+
   return (
-    <var title={title} className="CurrencyValue">
-      <abbr title={code}>{symbol}</abbr>
-      
-      &nbsp;{value.toFixed(2)}
+    <var title={title} className="CurrencyValue">      
+      &nbsp;{currencyString}
     </var>
   )
 }
