@@ -23,16 +23,17 @@ body {
     --spacerMajor: 65px;
     --side-margin: 20px;
 
-    
     background-color: var(--backgroundColor);
     color: var(--mainTextColor);
-    padding-top: var(--pageVerticalPadding);
 }
 
 .App {
     position: relative;
     display: block;
     font-family: "Roboto";
+    padding: var(--pageVerticalPadding) 0;
+    min-height: 100%;
+    box-sizing: border-box;
 
     header,
     main {
@@ -64,14 +65,10 @@ body {
                 display: grid;
                 grid-template-columns: 1fr repeat(3, min-content);
 
-                
-
                 .tableBody,
                 .tableFoot {
                     display: contents;
                 }
-
-                
 
                 .tableBody {
                     & > *:nth-child(2n + 0) {
@@ -94,7 +91,7 @@ body {
                 }
             }
 
-            .empityCard{
+            .empityCard {
                 grid-column: 1 / span 4;
             }
 
@@ -123,10 +120,8 @@ body {
         position: absolute;
         display: block;
         bottom: 0px;
-        width:100%;
+        width: 100%;
         background-color: gray;
-        margin-top: var(--pageVerticalPadding);
-        margin-bottom: calc(-200px + 1em);
 
         .footerContent {
             display: block;
@@ -134,18 +129,17 @@ body {
             padding: 0 var(--side-margin);
             box-sizing: border-box;
             margin: 0 auto;
-            max-width: var(--maxWidth);            
+            max-width: var(--maxWidth);
         }
     }
 }
 
-
 @media all and (max-width: 720px) {
-    .App{
-        .table{
+    .App {
+        .table {
             grid-template-columns: repeat(3, minmax(33%, 1fr)) !important;
 
-            .empityCard{
+            .empityCard {
                 grid-column: 1 / span 3;
                 padding: var(--side-margin);
 
