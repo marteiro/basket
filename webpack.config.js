@@ -52,7 +52,7 @@ module.exports = {
                     'css-loader',
                     'sass-loader',
                     'postcss-loader',
-                ]
+                ],
             },
             {
                 test: /\.svg(\?.*)?$/, // match img.svg and img.svg?param=value

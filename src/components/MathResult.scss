@@ -3,6 +3,10 @@
   
   label{
     grid-column: 1 / span 3;
+
+    @media only screen and (max-width: 720px) {
+      grid-column: 1 / span 2;
+    }
   }
 
   & > *{

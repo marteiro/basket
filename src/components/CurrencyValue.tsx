@@ -1,22 +1,21 @@
-import React from 'react';
-import { IProduct } from "src/api/RandomShop";
+import React from 'react'
 
 import './CurrencyValue.scss'
 
-interface IPros {
-  locale: string
-  value: number
-  code: string
-  title: string
+interface IProps {
+    locale: string
+    value: number
+    code: string
+    title: string
 }
 
-export default function CurrencyValue({locale,  value, code, title}:IPros) {
-  
-  const currencyString = value.toLocaleString(locale,{style: 'currency', currency: code})
+export default function CurrencyValue({value, code, title, locale }: IProps): JSX.Element {
 
-  return (
-    <var title={title} className="CurrencyValue">      
-      &nbsp;{currencyString}
-    </var>
-  )
+    const currencyString = value.toLocaleString(locale, { style: 'currency', currency: code })
+
+    return (
+        <output title={title} className="CurrencyValue">
+            &nbsp;{currencyString}
+        </output>
+    )
 }

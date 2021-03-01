@@ -1,94 +1,102 @@
-import React from "react";
-import { IProduct } from "src/api/RandomShop";
-import { CURRENCY_CODE, LOCALE, MAX_ITEM_COUNT } from "../config";
-import CurrencyValue from "./CurrencyValue";
+import React from 'react'
+import { IProduct } from 'src/api/RandomShop'
+import { CURRENCY_CODE, LOCALE, MAX_ITEM_COUNT } from '../config'
+import CurrencyValue from './CurrencyValue'
 
 import './ShopItem.scss'
 
 interface IProps extends IProduct {
-  onChange: (value: number) => void;
-  onRemove: (value: string) => void
+    onChange: (value: number) => void;
+    onRemove: (value: string) => void
 }
 
 interface IState {
-  quantity: number,
-  isRemoving: boolean
+    quantity: number,
+    isRemoving: boolean
 }
 
-
 export default class ShopItem extends React.Component<IProps, IState> {
-  public readonly state: IState = {
-    quantity: this.props.quantity,
-    isRemoving: false
-  };
+    public readonly state: IState = {
+        quantity: this.props.quantity,
+        isRemoving: false
+    };
 
-  public get cost(): number {
-    const { price } = this.props;
-    const quantity = this.state.quantity;
-    return price * quantity;
-  }
+    public get uid():string{
+        return this.props.uid
+    } 
 
-  private _update = (value: string | number) => {
-    const pickedValue = parseInt(value as string)
+    public get quantity():number{
+        return this.state.quantity
+    } 
 
-    if (pickedValue > MAX_ITEM_COUNT) alert(`Maxium of ${MAX_ITEM_COUNT} units per product type`)
+    public get cost(): number {
+        const { price } = this.props
+        const quantity = this.state.quantity
 
-    this.setState({
-      ...this.state,
-      quantity: Math.min(pickedValue, MAX_ITEM_COUNT)
-    });
-    this.props.onChange(this.cost);
-  };
+        return price * quantity
+    }
 
-  private _remove = () => {
-    this.setState({
-      ...this.state,
-      isRemoving: true
-    });
-    setTimeout(() => this.props.onRemove(this.props.uid), 320)
-  }
+    private _update = (value: string | number) => {
+        const pickedValue = parseInt(value as string)
 
-  render() {
-    const { quantity } = this.state;
-    const { name, price } = this.props;
+        if (pickedValue > MAX_ITEM_COUNT) { alert(`Maxium of ${MAX_ITEM_COUNT} units per product type`) }
 
-    return (
-      <fieldset className={`ShopItem ${this.state.isRemoving ? 'out' : ''}`}>
+        this.setState({
+            ...this.state,
+            quantity: Math.min(pickedValue, MAX_ITEM_COUNT)
+        })
+        this.props.onChange(this.cost)
+    };
 
-        <label>
-          {name}
-        </label>
+    private _remove = () => {
+        this.setState({
+            ...this.state,
+            isRemoving: true
+        })
+        setTimeout(() => this.props.onRemove(this.props.uid), 320)
+    }
 
-        <CurrencyValue
-          code={CURRENCY_CODE}
-          locale={LOCALE}
-          value={this.cost}
-          title="Price" />
+    render():JSX.Element {
+        const { quantity } = this.state
+        const { name } = this.props
 
-        <div>
-          <input
-            onChange={(event) => this._update(event.target.value)}
-            type="number"
-            step="1"
-            min="1"
-            max="5"
-            value={quantity}
-          />
-        </div>
+        return (
+            <fieldset className={`ShopItem ${this.state.isRemoving ? 'out' : ''}`}>
 
-        <div className="columnCost">
-          <CurrencyValue
-            code={CURRENCY_CODE}
-            value={this.cost}
-            locale={LOCALE}
-            title="Cost" />
+                <label>
+                    {name}
+                </label>
 
-          <button onClick={this._remove}>
-          Remove Product
-          </button>
-        </div>
+                <CurrencyValue
+                    code={CURRENCY_CODE}
+                    locale={LOCALE}
+                    value={this.cost}
+                    title="Price" />
 
-      </fieldset >
-    );
-  }
+                <div>
+                    <input
+                        onChange={(event) => this._update(event.target.value)}
+                        type="number"
+                        step="1"
+                        min="1"
+                        max="5"
+                        value={quantity}
+                    />
+                </div>
+
+                <div className="columnCost">
+                    <CurrencyValue
+                        code={CURRENCY_CODE}
+                        value={this.cost}
+                        locale={LOCALE}
+                        title="Cost" />
+
+                    <button onClick={this._remove} type="button">
+                        Remove Product
+                    </button>
+                </div>
+
+            </fieldset >
+        )
+    }
 }

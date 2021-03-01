@@ -1,65 +1,133 @@
-.body {
-  overflow-x: hidden;
-  
+body,
+html {
+    margin: 0;
+    padding: 0;
+    border: none;
+    height: 100%;
+}
+
+body {
+    --backgroundColor: #e8e8e8;
+    --altBackgroundColor: #dddddd;
+    --accentColor: #01016b;
+
+    --mainTextColor: black;
+    --altTextColor: #808080;
+
+    --maxWidth: 600px;
+    --pageVerticalPadding: 130px;
+    --spacer: 20px;
+    --spacerMajor: 65px;
+
+    overflow-x: hidden;
+    background-color: var(--backgroundColor);
+    color: var(--mainTextColor);
 }
 
 .App {
-  --side-margin: 20px;
+    --side-margin: 20px;
+    display: block;
+    font-family: "Roboto";
 
-  font-family: 'Roboto';
-  display: block;
-  max-width: 600px;
-  margin: 0 auto;
-
-  header{
-    margin-left: var(--side-margin);
-
-    img{
-      height: 60px;
-    }
-  }
-
-  .info{
-    padding: 0 var(--side-margin);
-    box-sizing: border-box;
-    margin: 50px 0;
-  }
-
-  .table {
-    display: grid;
-    grid-template-columns: 1fr repeat(3, auto);
-
-    & > div {
-      display: contents;
+    header,
+    main {
+        display: block;
+        margin: 0 auto;
+        max-width: var(--maxWidth);
     }
 
-    .tableHead{
-      & > div{
-        border-bottom: 2px solid black;
-        margin-bottom: 20px;
+    header {
+        margin-top: var(--pageVerticalPadding);
+        box-sizing: border-box;
         padding: 0 var(--side-margin);
-        
-        // align all but first table head title to center
-        &:not(:first-child){
-          text-align: center;
+
+        img {
+            height: var(--spacerMajor);
         }
-      }
     }
 
-    .tableBody{
-      & > *:nth-child(2n+0) {
-        --row-color: #eee;
-      }
+    main {
+        padding: 0;
+
+        form {
+            .info {
+                padding: 0 var(--side-margin);
+                box-sizing: border-box;
+                margin: var(--spacerMajor) 0;
+            }
+
+            .table {
+                display: grid;
+                grid-template-columns: 1fr repeat(3, min-content);
+
+                @media all and (max-width: 720px) {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+
+                .tableBody,
+                .tableFoot {
+                    display: contents;
+                }
+
+                
+
+                .tableBody {
+                    & > *:nth-child(2n + 0) {
+                        --row-color: var(--altBackgroundColor);
+                    }
+                }
+
+                .tableFoot {
+                    color: var(--altTextColor);
+
+                    & > *:first-child > * {
+                        margin-top: var(--spacerMajor);
+                    }
+
+                    & > *:last-child > * {
+                        margin-top: 20px;
+                        font-weight: 700;
+                        color: var(--mainTextColor);
+                    }
+                }
+            }
+
+            .buttonPlacer {
+                margin-top: var(--spacerMajor);
+                grid-column: 1 / span 3;
+                text-align: right;
+                padding-right: var(--side-margin);
+
+                button {
+                    font-family: inherit;
+                    background-color: var(--accentColor);
+                    color: white;
+                    padding: 0.3em 0.5em;
+                    font-size: 25px;
+                    font-weight: 700;
+                    border-radius: 13px;
+                    border: none;
+                    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.7);
+                }
+            }
+        }
     }
 
-    .tableFoot{
-      & > *:first-child > *{
-        margin-top: 20px;
-      }
+    footer {
+        position: relative;
+        display: block;
+        background-color: gray;
+        margin-top: var(--pageVerticalPadding);
+        height: 200px;
+        margin-bottom: calc(-200px + 1em);
 
-      & > *:last-child > *{
-        margin-top: 20px;
-      }
+        .footerContent {
+            display: block;
+            color: white;
+            padding: 0 var(--side-margin);
+            box-sizing: border-box;
+            margin: 0 auto;
+            max-width: var(--maxWidth);            
+        }
     }
-  }
 }
