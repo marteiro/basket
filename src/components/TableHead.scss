@@ -11,18 +11,19 @@
             text-align: center;
         }
     }
+}
 
-    @media only screen and (max-width: 720px) {
+@media only screen and (max-width: 720px) {
+    .TableHead {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        width: 100%;
+        grid-column: 1 / span 3;
         position: sticky;
         top: 0px;
         z-index: 1;
         background-color: var(--backgroundColor);
 
-
-        & > *{
+        & > * {
             margin-bottom: 0 !important;
             padding: var(--spacer) !important;
         }

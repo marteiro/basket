@@ -4,6 +4,9 @@ html {
     padding: 0;
     border: none;
     height: 100%;
+
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body {
@@ -18,14 +21,16 @@ body {
     --pageVerticalPadding: 130px;
     --spacer: 20px;
     --spacerMajor: 65px;
+    --side-margin: 20px;
 
-    overflow-x: hidden;
+    
     background-color: var(--backgroundColor);
     color: var(--mainTextColor);
+    padding-top: var(--pageVerticalPadding);
 }
 
 .App {
-    --side-margin: 20px;
+    position: relative;
     display: block;
     font-family: "Roboto";
 
@@ -37,7 +42,6 @@ body {
     }
 
     header {
-        margin-top: var(--pageVerticalPadding);
         box-sizing: border-box;
         padding: 0 var(--side-margin);
 
@@ -60,9 +64,7 @@ body {
                 display: grid;
                 grid-template-columns: 1fr repeat(3, min-content);
 
-                @media all and (max-width: 720px) {
-                    grid-template-columns: repeat(3, 1fr);
-                }
+                
 
                 .tableBody,
                 .tableFoot {
@@ -92,6 +94,10 @@ body {
                 }
             }
 
+            .empityCard{
+                grid-column: 1 / span 4;
+            }
+
             .buttonPlacer {
                 margin-top: var(--spacerMajor);
                 grid-column: 1 / span 3;
@@ -114,11 +120,12 @@ body {
     }
 
     footer {
-        position: relative;
+        position: absolute;
         display: block;
+        bottom: 0px;
+        width:100%;
         background-color: gray;
         margin-top: var(--pageVerticalPadding);
-        height: 200px;
         margin-bottom: calc(-200px + 1em);
 
         .footerContent {
@@ -128,6 +135,22 @@ body {
             box-sizing: border-box;
             margin: 0 auto;
             max-width: var(--maxWidth);            
+        }
+    }
+}
+
+
+@media all and (max-width: 720px) {
+    .App{
+        .table{
+            grid-template-columns: repeat(3, minmax(33%, 1fr)) !important;
+
+            .empityCard{
+                grid-column: 1 / span 3;
+                padding: var(--side-margin);
+
+                text-align: center;
+            }
         }
     }
 }

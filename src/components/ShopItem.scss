@@ -14,38 +14,25 @@
         margin-bottom: 0;
     }
 
-    & > *:first-child {
+    label {
         justify-items: left;
         padding-left: var(--side-margin);
     }
 
-    @media all and (max-width: 720px) {
-        & > *:first-child {
-            grid-column: 1 / span 3;
-            font-weight: 700;
-        }
+    .inputWrapper {
+        padding: 0;
 
-        & > * {
-            padding-left: var(--side-margin);
-            justify-items: left;
+        input {
+            min-width: 3em;
+            text-align: right;
+            font-size: inherit;
+            padding: 0.2em 0 0.2em 0.2em;
+            border-style: none;
+            border: 1px solid var(--altTextColor);
+            box-sizing: border-box;
+            margin: 0;
+            color: var(--mainTextColor);
         }
-
-        & > *:last-child {
-            padding-right: var(--side-margin);
-            justify-items: right;
-        }
-    }
-
-    input {
-        min-width: 3em;
-        text-align: right;
-        font-size: inherit;
-        padding: 0.2em 0 0.2em 0.2em;
-        border-style: none;
-        border: 1px solid var(--altTextColor);
-        box-sizing: border-box;
-        margin: 0;
-        color: var(--mainTextColor);
     }
 
     .columnCost {
@@ -71,7 +58,7 @@
                 /*coud not get variables loaded from sasss in time*/
                 background-image: url(/public/assets/trash-icon.svg);
                 -svg-mixer-fill: #01016b;
-                background-position: center;
+                background-position: center right;
                 background-repeat: no-repeat;
                 background-size: contain;
                 z-index: 100;
@@ -87,5 +74,46 @@
         transform: translate(-20vw);
         height: 0px;
         opacity: 0;
+    }
+}
+
+@media all and (max-width: 720px) {
+    .ShopItem {
+        overflow: hidden;
+
+        & > * {
+            padding: 0 !important;
+            justify-items: left;
+        }
+
+        & > .CurrencyValue {
+            padding-left: var(--side-margin) !important;
+        }
+
+        .inputWrapper {
+            padding: 0 var(--side-margin) !important;
+
+            input {
+                width: 100%;
+                padding: 0 0.3em;
+            }
+        }
+
+        label {
+            padding-left: var(--side-margin) !important;
+            grid-column: 1 / span 3;
+            font-weight: 700;
+        }
+
+        .columnCost {
+            padding-right: var(--side-margin) !important;
+            justify-items: right;
+
+            button {
+                top: -50%;
+                right: var(--side-margin);
+                transform: translate(0%, -50%);
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ import MathResult from './components/MathResult'
 import { randomShop, IProduct, postResults, ICheckoutProduct } from './api/RandomShop'
 import './App.scss'
 import TableHead from './components/TableHead'
+import { FETCH_N_ITEMS } from './config'
 
 interface ITotal {
     subtotal: number;
@@ -25,7 +26,7 @@ export default function App(): JSX.Element {
     // fetching data once
     useEffect(() => {
         (async () => {
-            const apiProducts = await randomShop(10)
+            const apiProducts = await randomShop(FETCH_N_ITEMS)
             setElRefs(apiProducts.map(() => createRef()))
             setProducts(apiProducts)
         })()
@@ -60,15 +61,15 @@ export default function App(): JSX.Element {
         event.preventDefault()
 
         postResults(
-            elRefs.reduce<ICheckoutProduct[]>((acc, ref) =>{
-                if (!ref.current) {return acc}
+            elRefs.reduce<ICheckoutProduct[]>((acc, ref) => {
+                if (!ref.current) { return acc }
 
                 return [...acc, {
                     uid: ref.current.uid,
                     quantity: ref.current.quantity
                 }]
-            
-            } , [])
+
+            }, [])
         )
     }
 
@@ -93,6 +94,7 @@ export default function App(): JSX.Element {
                     <section className="table">
                         <TableHead />
 
+                        {/* Product Loop */}
                         <div className="tableBody">
                             {products.map((product: IProduct, i: number) => (
                                 <ShopItem
@@ -104,24 +106,43 @@ export default function App(): JSX.Element {
                             ))}
                         </div>
 
-                        <div className="tableFoot">
-                            <MathResult title="Subtotal" value={totals.subtotal} />
-                            <MathResult title="VAT @ 20%" value={totals.vat} />
-                            <MathResult title="Total Cost" value={totals.total} />
-                        </div>
+                        {
+                            // Empity Basket Condition 
+                            products.length == 0
+                                ? (
+                                    <strong className="empityCard">
+                                        No Products in the Basket, refresh the page to view more items.
+                                    </strong>
+
+                                )
+                                : (
+                                    <>
+                                        {/* Subtotal, Vat and Total */}
+                                        <div className="tableFoot">
+                                            <MathResult title="Subtotal" value={totals.subtotal} />
+                                            <MathResult title="VAT @ 20%" value={totals.vat} />
+                                            <MathResult title="Total Cost" value={totals.total} />
+                                        </div>
+
+                                        {/* No Product Warn */}
+                                        <div className="buttonPlacer">
+                                            <button type="submit" onClick={submitResults}>Buy Now</button>
+                                        </div>
+                                    </>
+                                )
+                        }
+
                     </section>
 
-                    <div className="buttonPlacer">
-                        <button type="submit" onClick={submitResults}>Buy Now</button>
-                    </div>
                 </form>
             </main>
 
             <footer>
                 <small className="footerContent">
                     <strong>
-                        2013 AKQA Ltd.
+                        2013 AKQA Ltd. 
                     </strong>
+                    &nbsp;
                     Registered in England: 2964394
                 </small>
             </footer>

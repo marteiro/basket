@@ -37,9 +37,7 @@ export default class ShopItem extends React.Component<IProps, IState> {
     }
 
     private _update = (value: string | number) => {
-        const pickedValue = parseInt(value as string)
-
-        if (pickedValue > MAX_ITEM_COUNT) { alert(`Maxium of ${MAX_ITEM_COUNT} units per product type`) }
+        const pickedValue = parseInt(value as string) || 0
 
         this.setState({
             ...this.state,
@@ -73,13 +71,14 @@ export default class ShopItem extends React.Component<IProps, IState> {
                     value={this.cost}
                     title="Price" />
 
-                <div>
+                <div className="inputWrapper">
                     <input
                         onChange={(event) => this._update(event.target.value)}
                         type="number"
                         step="1"
                         min="1"
                         max="5"
+                        pattern="\d*"
                         value={quantity}
                     />
                 </div>

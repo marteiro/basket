@@ -39,12 +39,15 @@ export const randomShop = async function (qty: number): Promise<IProduct[]> {
 }
 
 export const postResults = async function(products: ICheckoutProduct[]):Promise<void>{
-    console.log(products)
-    // fetch('https://example.com/profile', {
-    //     method: 'POST', // or 'PUT'
+    const payload = JSON.stringify(products)
+    console.log(payload)
+    alert(`Thanks for your Purchase! This page will Reload. \n \n  ${payload}`)
+    location.reload()
+    // fetch('http://akqa.com/', {
+    //     method: 'POST',
     //     headers: {
     //         'Content-Type': 'application/json',
     //     },
-    //     body: JSON.stringify(data),
+    //     body: ,
     // })
 }
